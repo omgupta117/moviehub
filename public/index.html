@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieHub | Discover Your Next Favorite Movie</title>
+    <meta name="description" content="MovieHub is a premium movie discovery platform. Explore trending films, search for your favorites, check ratings, and build your personal watchlist.">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MovieHub | Discover Your Next Favorite Movie">
+    <meta property="og:description" content="Explore trending cinema, discover hidden gems, check ratings, and find something worth watching tonight.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://image.tmdb.org/t/p/w1280/9l1eZiJHmhr5jIlthMdJN5WYoff.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='2' y='4' width='20' height='16' rx='2' fill='%23e50914'/><text x='12' y='15' font-size='10' fill='white' text-anchor='middle' font-weight='bold'>M</text></svg>" type="image/svg+xml">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="logo" data-nav-target="home" role="button" tabindex="0" aria-label="MovieHub Home">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="#e50914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 8H22" stroke="#e50914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 16H22" stroke="#e50914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 4V20" stroke="#e50914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 4V20" stroke="#e50914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Movie<span>Hub</span>
+            </div>
+
+            <button class="mobile-menu-btn" data-action="mobile-menu" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" role="menubar">
+                <li role="none"><a href="#" class="nav-link active" data-nav-target="home" role="menuitem">Home</a></li>
+                <li role="none"><a href="#" class="nav-link" data-nav-target="search" role="menuitem">Search</a></li>
+                <li role="none"><a href="#" class="nav-link" data-nav-target="watchlist" role="menuitem">Watchlist</a></li>
+                <li role="none"><a href="#" class="nav-link" data-nav-target="about" role="menuitem">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main-content" class="main-content">
+        <section id="home-view" class="view active" aria-label="Home">
+            <div class="hero">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1>Discover Your Next <br><span class="highlight">Favorite Movie</span></h1>
+                    <p>Explore trending cinema, discover hidden gems, check ratings, and find something worth watching tonight.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" data-nav-target="search">Explore Movies</button>
+                        <button class="btn-secondary" data-nav-target="watchlist">My Watchlist</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container popular-section">
+                <div class="section-header">
+                    <h2>Trending Now</h2>
+                    <div class="accent-line" aria-hidden="true"></div>
+                </div>
+                <div id="popular-loading" class="movies-grid" aria-label="Loading trending movies"></div>
+                <div id="popular-movies-grid" class="movies-grid hidden" aria-label="Trending movies"></div>
+            </div>
+        </section>
+
+        <section id="search-view" class="view" aria-label="Search movies">
+            <div class="search-hero">
+                <div class="container">
+                    <h2>Search Movies</h2>
+                    <p>Find movies, discover new stories.</p>
+                    <div class="search-box" role="search">
+                        <svg class="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="search" id="main-search-input" placeholder="Search for a movie (e.g. Inception, Marvel)..." aria-label="Search for a movie" autocomplete="off">
+                        <button class="btn-primary" data-action="search">Search</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container" style="padding-bottom: 60px;">
+                <div id="search-results-info" class="results-info hidden" role="status" aria-live="polite"></div>
+                <div id="search-loading" class="movies-grid hidden" aria-label="Loading search results"></div>
+                <div id="search-error" class="error-state hidden" role="alert"></div>
+                <div id="search-results-grid" class="movies-grid" aria-label="Search results"></div>
+            </div>
+        </section>
+
+        <section id="watchlist-view" class="view" aria-label="Watchlist">
+            <div class="container page-content">
+                <div class="section-header">
+                    <h2>My Watchlist</h2>
+                    <div class="accent-line" aria-hidden="true"></div>
+                </div>
+                <div id="watchlist-empty" class="empty-state hidden">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--text-secondary);">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <h3>Your watchlist is empty</h3>
+                    <p>Save movies here and come back to them later.</p>
+                    <button class="btn-primary" data-nav-target="search">Discover Movies</button>
+                </div>
+                <div id="watchlist-grid" class="movies-grid" aria-label="Saved movies"></div>
+            </div>
+        </section>
+
+        <section id="about-view" class="view" aria-label="About MovieHub">
+            <div class="container page-content">
+                <div class="about-card" style="text-align: center; padding: 100px 20px;">
+                    <h2>About MovieHub</h2>
+                    <div class="accent-line" style="margin: 20px auto;" aria-hidden="true"></div>
+                    <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.8;">
+                        MovieHub is a premium movie discovery platform powered by
+                        <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">TMDB</a>.
+                        Experience cinematic browsing, search for your favorite films, check ratings, and build your personal watchlist.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="details-view" class="view" aria-label="Movie details">
+            <div id="details-backdrop" class="details-backdrop"></div>
+
+            <div class="container details-container">
+                <button class="btn-back" data-action="back" aria-label="Go back to search results">
+                    ← Back
+                </button>
+
+                <div id="details-loading" class="details-skeleton-container hidden" aria-label="Loading movie details"></div>
+                <div id="details-error" class="error-state hidden" role="alert"></div>
+                <div id="movie-details-content" class="details-content hidden"></div>
+
+                <div id="similar-movies-section" class="popular-section hidden" style="margin-top: 60px;">
+                    <div class="section-header">
+                        <h2>You May Also Like</h2>
+                        <div class="accent-line" aria-hidden="true"></div>
+                    </div>
+                    <div id="similar-movies-grid" class="movies-grid" aria-label="Similar movies"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container footer-content">
+            <div class="footer-logo" aria-hidden="true">Movie<span>Hub</span></div>
+            <p style="color: var(--text-secondary); margin-top: 10px;">Discover. Explore. Watch.</p>
+            <p class="copyright">&copy; <span id="current-year"></span> MovieHub. All rights reserved.</p>
+            <p style="color: var(--text-secondary); font-size: 0.75rem; margin-top: 8px;">
+                Data provided by <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">TMDB</a>
+            </p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
