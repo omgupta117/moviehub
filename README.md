@@ -1,60 +1,52 @@
-# MovieHub
+# MovieHub 🎬
 
-A premium movie discovery platform powered by [TMDB](https://www.themoviedb.org/).
+MovieHub is a movie discovery website built for people who enjoy finding something good to watch without digging through multiple platforms.
 
-## Features
+You can explore trending movies, search for a specific title, and open a movie to see its details like rating, runtime, genres, cast, crew, and overview.
 
-- **Trending Movies** — Browse what's popular this week
-- **Movie Search** — Search by title with instant results
-- **Movie Details** — View ratings, runtime, overview, and similar movies
-- **Watchlist** — Save movies to a personal watchlist (localStorage)
-- **IMDb Links** — Direct links to IMDb pages
-- **Responsive Design** — Works on all devices from 360px to 2560px+
+The project uses the TMDB API for movie data and an Express.js backend to handle API requests securely.
 
-## Getting Started
+## Live Demo
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) v16+
-- A TMDB API key ([get one here](https://www.themoviedb.org/settings/api))
+🌐 https://moviehub-2-i72z.onrender.com
 
-### Setup
+## What you can do
 
-```bash
-# 1. Clone the repository
-git clone <your-repo-url>
-cd MovieHub
+- Browse trending movies
+- Search for movies by title
+- Open a detailed movie page
+- Check ratings, genres, runtime and release year
+- View cast, director and writer information
+- Open the movie directly on IMDb
+- Save movies to a personal watchlist
+- Use the site comfortably on desktop and mobile
 
-# 2. Install dependencies
-npm install
+## Tech Stack
 
-# 3. Create .env file
-cp .env.example .env
-# Edit .env and add your TMDB API key
+**Frontend**
+- HTML
+- CSS
+- JavaScript
 
-# 4. Start the server
-npm start
-```
+**Backend**
+- Node.js
+- Express.js
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+**API**
+- TMDB API
 
-## Architecture
+**Deployment**
+- Render
 
-```
-MovieHub/
-├── server.js          # Express proxy server (hides API key)
-├── public/
-│   ├── index.html     # SPA entry point
-│   ├── style.css      # Stylesheet (responsive)
-│   └── script.js      # Client-side application logic
-├── .env               # Environment variables (not committed)
-├── .env.example       # Environment template
-├── .gitignore
-├── package.json
-└── README.md
-```
+## How it works
 
-**API Architecture:** The frontend calls `/api/tmdb/*` which is proxied by the Express server to the TMDB API. The API key never reaches the client.
+The frontend doesn't communicate directly with TMDB using the API key.
 
-## License
+Instead, requests go through the Express server:
 
-ISC
+```text
+Browser → Express Server → TMDB API
+                       ↓
+                  Movie Data
+                       ↓
+                    Browser
